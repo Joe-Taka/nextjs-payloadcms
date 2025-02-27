@@ -738,7 +738,31 @@ export interface Evento {
   inicio: string;
   termino?: string | null;
   aberto?: boolean | null;
-  tipo: 'online' | 'presencial' | 'hibrido';
+  /**
+   * Selecione o campus na qual o evento está associado. Se não for atrelado a nenhum campus, deixe sem preencher
+   */
+  campus?:
+    | (
+        | 'apucarana'
+        | 'campo-mourao'
+        | 'cornelio-procopio'
+        | 'curitiba'
+        | 'dois-vizinhos'
+        | 'francisco-beltrao'
+        | 'guarapuava'
+        | 'londrina'
+        | 'medianeira'
+        | 'pato-branco'
+        | 'ponta-grossa'
+        | 'reitoria'
+        | 'santa-helena'
+        | 'toledo'
+      )
+    | null;
+  modalidade: 'online' | 'presencial' | 'hibrido';
+  /**
+   * Informe o local (ex: sala, bloco) onde o evento será realizado
+   */
   local?: string | null;
   url?: string | null;
   updatedAt: string;
@@ -1308,7 +1332,8 @@ export interface EventosSelect<T extends boolean = true> {
   inicio?: T;
   termino?: T;
   aberto?: T;
-  tipo?: T;
+  campus?: T;
+  modalidade?: T;
   local?: T;
   url?: T;
   updatedAt?: T;

@@ -1,5 +1,5 @@
 {
-  "id": "06e51bb5-df46-43b1-b661-8f0ea5525575",
+  "id": "4f576a98-f28e-4978-8612-c3eea3608d1d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -4991,13 +4991,13 @@
           "name": "descricao",
           "type": "varchar",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "image_id": {
           "name": "image_id",
           "type": "integer",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "inicio": {
           "name": "inicio",
@@ -5017,16 +5017,23 @@
           "primaryKey": false,
           "notNull": false
         },
-        "local": {
-          "name": "local",
-          "type": "varchar",
+        "campus": {
+          "name": "campus",
+          "type": "enum_eventos_campus",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": false
         },
-        "tipo": {
-          "name": "tipo",
-          "type": "enum_eventos_tipo",
+        "modalidade": {
+          "name": "modalidade",
+          "type": "enum_eventos_modalidade",
           "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "local": {
+          "name": "local",
+          "type": "varchar",
           "primaryKey": false,
           "notNull": false
         },
@@ -9395,8 +9402,28 @@
         "published"
       ]
     },
-    "public.enum_eventos_tipo": {
-      "name": "enum_eventos_tipo",
+    "public.enum_eventos_campus": {
+      "name": "enum_eventos_campus",
+      "schema": "public",
+      "values": [
+        "apucarana",
+        "campo-mourao",
+        "cornelio-procopio",
+        "curitiba",
+        "dois-vizinhos",
+        "francisco-beltrao",
+        "guarapuava",
+        "londrina",
+        "medianeira",
+        "pato-branco",
+        "ponta-grossa",
+        "reitoria",
+        "santa-helena",
+        "toledo"
+      ]
+    },
+    "public.enum_eventos_modalidade": {
+      "name": "enum_eventos_modalidade",
       "schema": "public",
       "values": [
         "online",

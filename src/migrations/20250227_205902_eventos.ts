@@ -2,17 +2,19 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE TYPE "public"."enum_eventos_tipo" AS ENUM('online', 'presencial', 'hibrido');
+   CREATE TYPE "public"."enum_eventos_campus" AS ENUM('apucarana', 'campo-mourao', 'cornelio-procopio', 'curitiba', 'dois-vizinhos', 'francisco-beltrao', 'guarapuava', 'londrina', 'medianeira', 'pato-branco', 'ponta-grossa', 'reitoria', 'santa-helena', 'toledo');
+  CREATE TYPE "public"."enum_eventos_modalidade" AS ENUM('online', 'presencial', 'hibrido');
   CREATE TABLE IF NOT EXISTS "eventos" (
   	"id" serial PRIMARY KEY NOT NULL,
   	"titulo" varchar NOT NULL,
-  	"descricao" varchar,
-  	"image_id" integer NOT NULL,
+  	"descricao" varchar NOT NULL,
+  	"image_id" integer,
   	"inicio" timestamp(3) with time zone NOT NULL,
   	"termino" timestamp(3) with time zone,
   	"aberto" boolean,
+  	"campus" "enum_eventos_campus",
+  	"modalidade" "enum_eventos_modalidade" NOT NULL,
   	"local" varchar,
-  	"tipo" "enum_eventos_tipo",
   	"url" varchar,
   	"updated_at" timestamp(3) with time zone DEFAULT now() NOT NULL,
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
@@ -45,5 +47,6 @@ export async function down({ db, payload, req }: MigrateDownArgs): Promise<void>
   
   DROP INDEX IF EXISTS "payload_locked_documents_rels_eventos_id_idx";
   ALTER TABLE "payload_locked_documents_rels" DROP COLUMN IF EXISTS "eventos_id";
-  DROP TYPE "public"."enum_eventos_tipo";`)
+  DROP TYPE "public"."enum_eventos_campus";
+  DROP TYPE "public"."enum_eventos_modalidade";`)
 }
