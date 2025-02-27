@@ -1,7 +1,15 @@
 import type { CollectionConfig } from 'payload'
+import { authenticated } from '../access/authenticated'
 
+//. JOE: Coleção 'Events' criada por mim
 export const Events: CollectionConfig = {
   slug: 'eventos',
+  access: {
+    create: authenticated,
+    delete: authenticated,
+    read: authenticated,
+    update: authenticated,
+  },
   fields: [
     {
       name: 'titulo',
@@ -11,12 +19,13 @@ export const Events: CollectionConfig = {
     {
       name: 'descricao',
       type: 'text',
-      required: false,
+      required: true,
     },
     {
       name: 'image',
       type: 'upload',
       label: 'Preview image',
+      required: false,
       admin: {
         position: 'sidebar',
       },
@@ -46,7 +55,9 @@ export const Events: CollectionConfig = {
           pickerAppearance: 'dayAndTime',
         },
         condition: (data, siblingData) => {
-          return !siblingData.aberto
+          //console.log('data', data)
+          //console.log('siblingData', siblingData)
+          return !data.aberto
         },
       },
     },
@@ -57,16 +68,46 @@ export const Events: CollectionConfig = {
       required: false,
     },
     {
+      name: 'tipo',
+      label: 'Tipo do evento',
+      type: 'select',
+      required: true,
+      options: [
+        {
+          label: 'Online',
+          value: 'online',
+        },
+        {
+          label: 'Presencial',
+          value: 'presencial',
+        },
+        {
+          label: 'Híbrido',
+          value: 'hibrido',
+        },
+      ],
+    },
+    {
       name: 'local',
       label: 'Local do evento',
       type: 'text',
-      required: false,
+      required: true,
+      admin: {
+        condition: (data, siblingData) => {
+          return data.tipo === 'presencial' || data.tipo === 'hibrido'
+        },
+      },
     },
     {
       name: 'url',
-      label: 'URL do evento',
+      label: 'URL da transmissão',
       type: 'text',
-      required: false,
+      required: true,
+      admin: {
+        condition: (data, siblingData) => {
+          return data.tipo === 'online' || data.tipo === 'hibrido'
+        },
+      },
     },
   ],
 }
