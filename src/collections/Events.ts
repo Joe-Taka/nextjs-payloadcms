@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { authenticated } from '../access/authenticated'
+import { anyone } from '../access/anyone'
 
 //. JOE: Coleção 'Events' criada por mim
 export const Events: CollectionConfig = {
@@ -7,7 +8,7 @@ export const Events: CollectionConfig = {
   access: {
     create: authenticated,
     delete: authenticated,
-    read: authenticated,
+    read: anyone,
     update: authenticated,
   },
   fields: [
