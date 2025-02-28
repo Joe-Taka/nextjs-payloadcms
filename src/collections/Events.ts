@@ -163,7 +163,7 @@ export const Events: CollectionConfig = {
       required: true,
       admin: {
         condition: (data, siblingData) => {
-          return data.tipo === 'presencial' || data.tipo === 'hibrido'
+          return data.modalidade === 'presencial' || data.modalidade === 'hibrido'
         },
         description: 'Informe o local (ex: sala, bloco) onde o evento será realizado',
       },
@@ -175,7 +175,7 @@ export const Events: CollectionConfig = {
       required: true,
       admin: {
         condition: (data, siblingData) => {
-          return data.tipo === 'online' || data.tipo === 'hibrido'
+          return data.modalidade === 'online' || data.modalidade === 'hibrido'
         },
       },
     },
