@@ -373,7 +373,11 @@ export interface Category {
  */
 export interface User {
   id: number;
+  /**
+   * Nome para o usuário a ser criado
+   */
   name?: string | null;
+  privilegio: ('admin' | 'editor' | 'usuário')[];
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -1311,6 +1315,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  privilegio?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
