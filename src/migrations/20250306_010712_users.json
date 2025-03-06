@@ -1,5 +1,5 @@
 {
-  "id": "ded8c941-fc32-4912-a91a-2fc0c8474878",
+  "id": "d188afde-b492-4d5a-ba85-16faf17361f3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -4843,6 +4843,89 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.users_privilegio": {
+      "name": "users_privilegio",
+      "schema": "",
+      "columns": {
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "enum_users_privilegio",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "users_privilegio_order_idx": {
+          "name": "users_privilegio_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_privilegio_parent_idx": {
+          "name": "users_privilegio_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "users_privilegio_parent_fk": {
+          "name": "users_privilegio_parent_fk",
+          "tableFrom": "users_privilegio",
+          "tableTo": "users",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.users": {
       "name": "users",
       "schema": "",
@@ -4852,20 +4935,6 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "privilegio": {
-          "name": "privilegio",
-          "type": "enum_users_privilegio",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'Usuário'"
         },
         "updated_at": {
           "name": "updated_at",
@@ -9416,7 +9485,7 @@
       "values": [
         "admin",
         "editor",
-        "usuário"
+        "usuario"
       ]
     },
     "public.enum_eventos_campus": {

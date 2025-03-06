@@ -67,7 +67,7 @@ export default buildConfig({
   }),
   collections: [Pages, Posts, Media, Categories, Users, Events],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [Footer],
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

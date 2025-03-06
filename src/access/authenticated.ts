@@ -5,7 +5,7 @@ import type { User } from '@/payload-types'
 export const RoleObj = {
   Admin: 'admin',
   Editor: 'editor',
-  User: 'usuário',
+  User: 'usuario',
 } as const
 
 export type TRole = (typeof RoleObj)[keyof typeof RoleObj]
@@ -20,13 +20,14 @@ export const authenticated: isAuthenticated = ({ req: { user } }) => {
 }
 
 // Se o usuário possuir algum valor de privilégio que esteja contido no array de roles, ele terá acesso
-function roleAccess(user: User | null, roles: TRole[]): boolean {
-  return roles.some((r) => user?.privilegio?.includes(r))
+export function roleAccess(user: User | null, roles: TRole[]): boolean {
+  return roles.some((r) => user && 'privilegio' in user && user.privilegio.includes(r))
 }
 
 // Se o usuário possuir algum valor de privilégio que esteja contido no array de roles, ele terá acesso
 export const hasRole =
   (...roles: TRole[]): Access<User> =>
   ({ req: { user } }) => {
+    console.log('roles', roles);
     return roleAccess(user, roles)
   }
