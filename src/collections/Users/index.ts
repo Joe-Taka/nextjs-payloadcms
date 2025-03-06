@@ -16,10 +16,16 @@ export const Users: CollectionConfig = {
     update: hasRole('admin'),
   },
   admin: {
-    defaultColumns: ['id', 'email', 'privilegio', 'updatedAt', 'createdAt'],
+    defaultColumns: ['id', 'name', 'email', 'privilegio', 'updatedAt', 'createdAt'],
   },
   auth: true,
   fields: [
+    // insert the default name field
+    {
+      name: 'name',
+      label: 'Nome',
+      type: 'text',
+    },
     {
       name: 'privilegio',
       label: 'Privilégio',

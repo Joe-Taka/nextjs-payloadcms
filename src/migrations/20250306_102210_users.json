@@ -1,5 +1,5 @@
 {
-  "id": "d188afde-b492-4d5a-ba85-16faf17361f3",
+  "id": "7428cf2e-a40e-466a-b1b1-08321a5303ba",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -4935,6 +4935,12 @@
           "type": "serial",
           "primaryKey": true,
           "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "updated_at": {
           "name": "updated_at",

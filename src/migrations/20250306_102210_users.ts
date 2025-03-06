@@ -17,13 +17,11 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   END $$;
   
   CREATE INDEX IF NOT EXISTS "users_privilegio_order_idx" ON "users_privilegio" USING btree ("order");
-  CREATE INDEX IF NOT EXISTS "users_privilegio_parent_idx" ON "users_privilegio" USING btree ("parent_id");
-  ALTER TABLE "users" DROP COLUMN IF EXISTS "name";`)
+  CREATE INDEX IF NOT EXISTS "users_privilegio_parent_idx" ON "users_privilegio" USING btree ("parent_id");`)
 }
 
 export async function down({ db, payload, req }: MigrateDownArgs): Promise<void> {
   await db.execute(sql`
    DROP TABLE "users_privilegio" CASCADE;
-  ALTER TABLE "users" ADD COLUMN "name" varchar;
   DROP TYPE "public"."enum_users_privilegio";`)
 }
