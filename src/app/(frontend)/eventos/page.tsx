@@ -25,13 +25,13 @@ export default async function Eventos() {
     },
   })
 
-  console.log('eventos', eventos)
+  //console.log('eventos', eventos)
   return (
     <ul>
       {eventos.docs.map((evento, id) => {
-        console.log('image', evento.image)
+        //console.log('image', evento.image)
         const imgUrl = (evento.image as Media).sizes?.thumbnail
-        console.log('imgUrl', imgUrl)
+        //console.log('imgUrl', imgUrl)
 
         return (
           <li key={id} className="bg-black p-4 rounded-md">

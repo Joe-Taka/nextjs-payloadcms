@@ -20,7 +20,7 @@ import { Events } from './collections/Events'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-console.log('path.resolve(dirname)', path.resolve(dirname));
+//console.log('path.resolve(dirname)', path.resolve(dirname));
 
 export default buildConfig({
   admin: {

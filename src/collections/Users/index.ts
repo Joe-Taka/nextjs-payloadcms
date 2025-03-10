@@ -10,10 +10,10 @@ export const Users: CollectionConfig = {
     /* admin: ({ req: { user } }) => {
       return roleAccess(user, ['admin'])
     }, */
-    create: () => true,
-    delete: () => true,
-    read: () => true,
-    update: () => true,
+    create: hasRole('admin'),
+    delete: hasRole('admin'),
+    read: hasRole('admin'),
+    update: hasRole('admin'),
   },
   admin: {
     defaultColumns: ['id', 'name', 'email', 'privilegio', 'updatedAt', 'createdAt'],
