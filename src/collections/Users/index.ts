@@ -1,5 +1,5 @@
 import type { CollectionConfig } from 'payload'
-//import { authenticated } from '../../access/authenticated'
+import { authenticated } from '../../access/authenticated'
 import { RoleObj } from '../../access/authenticated'
 import { hasRole } from '../../access/authenticated'
 
@@ -10,10 +10,10 @@ export const Users: CollectionConfig = {
     /* admin: ({ req: { user } }) => {
       return roleAccess(user, ['admin'])
     }, */
-    create: hasRole('admin'),
-    delete: hasRole('admin'),
-    read: hasRole('admin'),
-    update: hasRole('admin'),
+    create: () => true,
+    delete: () => true,
+    read: () => true,
+    update: () => true,
   },
   admin: {
     defaultColumns: ['id', 'name', 'email', 'privilegio', 'updatedAt', 'createdAt'],
@@ -54,7 +54,7 @@ export const Users: CollectionConfig = {
       options: [
         { label: 'Admin', value: RoleObj.Admin },
         { label: 'Editor', value: RoleObj.Editor },
-        { label: 'Usuário', value: RoleObj.User },
+        { label: 'Leitor', value: RoleObj.Leitor },
       ],
       //defaultValue: RoleObj.User, // Tirando porque é bugado
     },

@@ -5,7 +5,7 @@ import type { User } from '@/payload-types'
 export const RoleObj = {
   Admin: 'admin',
   Editor: 'editor',
-  User: 'usuario',
+  Leitor: 'leitor',
 } as const
 
 export type TRole = (typeof RoleObj)[keyof typeof RoleObj]

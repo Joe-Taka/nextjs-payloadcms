@@ -21,6 +21,12 @@ export const Categories: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'relatedPosts',
+      type: 'join',
+      collection: 'posts',
+      on: 'categories',
+    },
     ...slugField(),
   ],
 }

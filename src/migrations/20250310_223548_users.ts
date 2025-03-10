@@ -2,7 +2,7 @@ import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   await db.execute(sql`
-   CREATE TYPE "public"."enum_users_privilegio" AS ENUM('admin', 'editor', 'usuario');
+   CREATE TYPE "public"."enum_users_privilegio" AS ENUM('admin', 'editor', 'leitor');
   CREATE TABLE IF NOT EXISTS "users_privilegio" (
   	"order" integer NOT NULL,
   	"parent_id" integer NOT NULL,
