@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload'
-import { authenticated } from '../../access/authenticated'
+//import { authenticated } from '../../access/authenticated'
 import { RoleObj } from '../../access/authenticated'
-import { roleAccess, hasRole } from '../../access/authenticated'
+import { hasRole } from '../../access/authenticated'
 
 export const Users: CollectionConfig = {
   slug: 'users',

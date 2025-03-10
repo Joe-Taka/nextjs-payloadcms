@@ -20,6 +20,7 @@ import { Events } from './collections/Events'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+console.log('path.resolve(dirname)', path.resolve(dirname));
 
 export default buildConfig({
   admin: {
@@ -30,6 +31,18 @@ export default buildConfig({
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
+    },
+    meta: {
+      title: "Meu painel admin",
+      titleSuffix: 'Testando NextJS + PayloadCMS', // Text that appends the meta/page title displayed in the browser tab—must be a string.
+      icons: [
+        {
+          rel: 'icon',
+          // type is gif
+          type: 'image/gif',
+          url: '/msn-enfadado.gif', // Path to the favicon file.
+        },
+      ],
     },
     importMap: {
       baseDir: path.resolve(dirname),

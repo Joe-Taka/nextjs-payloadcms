@@ -42,11 +42,11 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
             defaultValue: 'reference',
             options: [
               {
-                label: 'Internal link',
+                label: 'Link interno',
                 value: 'reference',
               },
               {
-                label: 'Custom URL',
+                label: 'URL customizado',
                 value: 'custom',
               },
             ],
@@ -89,7 +89,10 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     },
   ]
 
+  console.log('!disableLabel', !disableLabel)
+
   if (!disableLabel) {
+    // Não faz nada?
     linkTypes.map((linkType) => ({
       ...linkType,
       admin: {
@@ -97,6 +100,8 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
         width: '50%',
       },
     }))
+
+    console.log('linkTypes', linkTypes);
 
     linkResult.fields.push({
       type: 'row',
