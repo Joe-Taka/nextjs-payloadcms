@@ -48,7 +48,7 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'categories', 'slug', 'updatedAt', 'authors'],
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({

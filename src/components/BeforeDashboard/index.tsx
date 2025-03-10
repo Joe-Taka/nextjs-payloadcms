@@ -67,7 +67,6 @@ const BeforeDashboard: React.FC = () => {
         custom component
       </a>
       , you can remove it at any time by updating your <strong>payload.config</strong>.
-      <h4 className="text-red-300 my-8">Usuários:</h4>
     </div>
   )
 }

@@ -27,6 +27,15 @@ export const Users: CollectionConfig = {
       type: 'text',
     },
     {
+      name: 'rolesUi',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '/components/MyComponents/GeralUse#UserRoles',
+        },
+      },
+    },
+    {
       name: 'privilegio',
       label: 'Privilégio',
       type: 'select',
