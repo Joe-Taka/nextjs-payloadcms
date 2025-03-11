@@ -1,5 +1,5 @@
 {
-  "id": "4f576a98-f28e-4978-8612-c3eea3608d1d",
+  "id": "c7f33166-049c-480b-8281-09ada0648267",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -4726,6 +4726,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
         "slug": {
           "name": "slug",
           "type": "varchar",
@@ -4834,6 +4840,324 @@
             "id"
           ],
           "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.subcategories": {
+      "name": "subcategories",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slug": {
+          "name": "slug",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "slug_lock": {
+          "name": "slug_lock",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": true
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp(3) with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "subcategories_slug_idx": {
+          "name": "subcategories_slug_idx",
+          "columns": [
+            {
+              "expression": "slug",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "subcategories_updated_at_idx": {
+          "name": "subcategories_updated_at_idx",
+          "columns": [
+            {
+              "expression": "updated_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "subcategories_created_at_idx": {
+          "name": "subcategories_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.subcategories_rels": {
+      "name": "subcategories_rels",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "path": {
+          "name": "path",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "categories_id": {
+          "name": "categories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "subcategories_rels_order_idx": {
+          "name": "subcategories_rels_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "subcategories_rels_parent_idx": {
+          "name": "subcategories_rels_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "subcategories_rels_path_idx": {
+          "name": "subcategories_rels_path_idx",
+          "columns": [
+            {
+              "expression": "path",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "subcategories_rels_categories_id_idx": {
+          "name": "subcategories_rels_categories_id_idx",
+          "columns": [
+            {
+              "expression": "categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "subcategories_rels_parent_fk": {
+          "name": "subcategories_rels_parent_fk",
+          "tableFrom": "subcategories_rels",
+          "tableTo": "subcategories",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "subcategories_rels_categories_fk": {
+          "name": "subcategories_rels_categories_fk",
+          "tableFrom": "subcategories_rels",
+          "tableTo": "categories",
+          "columnsFrom": [
+            "categories_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users_privilegio": {
+      "name": "users_privilegio",
+      "schema": "",
+      "columns": {
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "parent_id": {
+          "name": "parent_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "enum_users_privilegio",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "users_privilegio_order_idx": {
+          "name": "users_privilegio_order_idx",
+          "columns": [
+            {
+              "expression": "order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "users_privilegio_parent_idx": {
+          "name": "users_privilegio_parent_idx",
+          "columns": [
+            {
+              "expression": "parent_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "users_privilegio_parent_fk": {
+          "name": "users_privilegio_parent_fk",
+          "tableFrom": "users_privilegio",
+          "tableTo": "users",
+          "columnsFrom": [
+            "parent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -5017,10 +5341,9 @@
           "primaryKey": false,
           "notNull": false
         },
-        "campus": {
-          "name": "campus",
-          "type": "enum_eventos_campus",
-          "typeSchema": "public",
+        "campus_id": {
+          "name": "campus_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
@@ -5074,6 +5397,21 @@
           "method": "btree",
           "with": {}
         },
+        "eventos_campus_idx": {
+          "name": "eventos_campus_idx",
+          "columns": [
+            {
+              "expression": "campus_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
         "eventos_updated_at_idx": {
           "name": "eventos_updated_at_idx",
           "columns": [
@@ -5112,6 +5450,19 @@
           "tableTo": "media",
           "columnsFrom": [
             "image_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "eventos_campus_id_subcategories_id_fk": {
+          "name": "eventos_campus_id_subcategories_id_fk",
+          "tableFrom": "eventos",
+          "tableTo": "subcategories",
+          "columnsFrom": [
+            "campus_id"
           ],
           "columnsTo": [
             "id"
@@ -7889,6 +8240,12 @@
           "primaryKey": false,
           "notNull": false
         },
+        "subcategories_id": {
+          "name": "subcategories_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "users_id": {
           "name": "users_id",
           "type": "integer",
@@ -8028,6 +8385,21 @@
           "columns": [
             {
               "expression": "categories_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "payload_locked_documents_rels_subcategories_id_idx": {
+          "name": "payload_locked_documents_rels_subcategories_id_idx",
+          "columns": [
+            {
+              "expression": "subcategories_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -8203,6 +8575,19 @@
           "tableTo": "categories",
           "columnsFrom": [
             "categories_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "payload_locked_documents_rels_subcategories_fk": {
+          "name": "payload_locked_documents_rels_subcategories_fk",
+          "tableFrom": "payload_locked_documents_rels",
+          "tableTo": "subcategories",
+          "columnsFrom": [
+            "subcategories_id"
           ],
           "columnsTo": [
             "id"
@@ -9402,24 +9787,13 @@
         "published"
       ]
     },
-    "public.enum_eventos_campus": {
-      "name": "enum_eventos_campus",
+    "public.enum_users_privilegio": {
+      "name": "enum_users_privilegio",
       "schema": "public",
       "values": [
-        "apucarana",
-        "campo-mourao",
-        "cornelio-procopio",
-        "curitiba",
-        "dois-vizinhos",
-        "francisco-beltrao",
-        "guarapuava",
-        "londrina",
-        "medianeira",
-        "pato-branco",
-        "ponta-grossa",
-        "reitoria",
-        "santa-helena",
-        "toledo"
+        "admin",
+        "editor",
+        "leitor"
       ]
     },
     "public.enum_eventos_modalidade": {

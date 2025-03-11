@@ -70,6 +70,7 @@ export interface Config {
     posts: Post;
     media: Media;
     categories: Category;
+    subcategories: Subcategory;
     users: User;
     eventos: Evento;
     redirects: Redirect;
@@ -83,7 +84,7 @@ export interface Config {
   };
   collectionsJoins: {
     categories: {
-      relatedPosts: 'posts';
+      relatedSubcategories: 'subcategories';
     };
   };
   collectionsSelect: {
@@ -91,6 +92,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    subcategories: SubcategoriesSelect<false> | SubcategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     eventos: EventosSelect<false> | EventosSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
@@ -358,8 +360,9 @@ export interface Media {
 export interface Category {
   id: number;
   title: string;
-  relatedPosts?: {
-    docs?: (number | Post)[];
+  description?: string | null;
+  relatedSubcategories?: {
+    docs?: (number | Subcategory)[];
     hasNextPage?: boolean;
     totalDocs?: number;
   };
@@ -374,6 +377,20 @@ export interface Category {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories".
+ */
+export interface Subcategory {
+  id: number;
+  title: string;
+  description?: string | null;
+  relatedCategory: (number | Category)[];
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -752,24 +769,7 @@ export interface Evento {
   /**
    * Selecione o campus na qual o evento está associado. Se não for atrelado a nenhum campus, deixe sem preencher
    */
-  campus?:
-    | (
-        | 'apucarana'
-        | 'campo-mourao'
-        | 'cornelio-procopio'
-        | 'curitiba'
-        | 'dois-vizinhos'
-        | 'francisco-beltrao'
-        | 'guarapuava'
-        | 'londrina'
-        | 'medianeira'
-        | 'pato-branco'
-        | 'ponta-grossa'
-        | 'reitoria'
-        | 'santa-helena'
-        | 'toledo'
-      )
-    | null;
+  campus?: (number | null) | Subcategory;
   modalidade: 'online' | 'presencial' | 'hibrido';
   /**
    * Informe o local (ex: sala, bloco) onde o evento será realizado
@@ -966,6 +966,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'subcategories';
+        value: number | Subcategory;
       } | null)
     | ({
         relationTo: 'users';
@@ -1302,7 +1306,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
-  relatedPosts?: T;
+  description?: T;
+  relatedSubcategories?: T;
   slug?: T;
   slugLock?: T;
   parent?: T;
@@ -1314,6 +1319,19 @@ export interface CategoriesSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subcategories_select".
+ */
+export interface SubcategoriesSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  relatedCategory?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }

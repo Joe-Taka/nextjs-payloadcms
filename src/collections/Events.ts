@@ -71,71 +71,20 @@ export const Events: CollectionConfig = {
     {
       name: 'campus',
       label: 'Campus',
-      type: 'select',
-      required: false,
+      type: 'relationship',
+      relationTo: 'subcategories',
       admin: {
         position: 'sidebar',
         description:
           'Selecione o campus na qual o evento está associado. Se não for atrelado a nenhum campus, deixe sem preencher',
       },
-      options: [
-        {
-          label: 'Apucarana',
-          value: 'apucarana',
-        },
-        {
-          label: 'Campo Mourão',
-          value: 'campo-mourao',
-        },
-        {
-          label: 'Cornélio Procópio',
-          value: 'cornelio-procopio',
-        },
-        {
-          label: 'Curitiba',
-          value: 'curitiba',
-        },
-        {
-          label: 'Dois Vizinhos',
-          value: 'dois-vizinhos',
-        },
-        {
-          label: 'Francisco Beltrão',
-          value: 'francisco-beltrao',
-        },
-        {
-          label: 'Guarapuava',
-          value: 'guarapuava',
-        },
-        {
-          label: 'Londrina',
-          value: 'londrina',
-        },
-        {
-          label: 'Medianeira',
-          value: 'medianeira',
-        },
-        {
-          label: 'Pato Branco',
-          value: 'pato-branco',
-        },
-        {
-          label: 'Ponta Grossa',
-          value: 'ponta-grossa',
-        },
-        {
-          label: 'Reitoria',
-          value: 'reitoria',
-        },
-        {
-          label: 'Santa Helena',
-          value: 'santa-helena',
-        },
-        {
-          label: 'Toledo',
-          value: 'toledo',
-        },
-      ],
+      filterOptions: () => {
+        return {
+          'relatedCategory.title': {
+            equals: 'Campus',
+          },
+        }
+      },
     },
     {
       name: 'modalidade',

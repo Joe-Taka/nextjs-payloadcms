@@ -4,8 +4,8 @@ import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
 import { slugField } from '@/fields/slug'
 
-export const Categories: CollectionConfig = {
-  slug: 'categories',
+export const Subcategories: CollectionConfig = {
+  slug: 'subcategories',
   access: {
     create: authenticated,
     delete: authenticated,
@@ -28,10 +28,14 @@ export const Categories: CollectionConfig = {
       label: 'Descrição',
     },
     {
-      name: 'relatedSubcategories',
-      type: 'join',
-      collection: 'subcategories',
-      on: 'relatedCategory',
+      name: 'relatedCategory',
+      type: 'relationship',
+      admin: {
+        position: 'sidebar',
+      },
+      hasMany: true,
+      relationTo: 'categories',
+      required: true,
     },
     ...slugField(),
   ],

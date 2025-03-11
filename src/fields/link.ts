@@ -89,7 +89,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
     },
   ]
 
-  console.log('!disableLabel', !disableLabel)
+  //console.log('!disableLabel', !disableLabel)
 
   if (!disableLabel) {
     // Não faz nada?
@@ -101,7 +101,7 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
       },
     }))
 
-    console.log('linkTypes', linkTypes);
+    //console.log('linkTypes', linkTypes);
 
     linkResult.fields.push({
       type: 'row',

@@ -17,6 +17,7 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 import { Events } from './collections/Events'
+import { Subcategories } from './collections/Subcategories'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,7 +34,7 @@ export default buildConfig({
       beforeDashboard: ['@/components/BeforeDashboard'],
     },
     meta: {
-      title: "Meu painel admin",
+      title: 'Meu painel admin',
       titleSuffix: 'Testando NextJS + PayloadCMS', // Text that appends the meta/page title displayed in the browser tab—must be a string.
       icons: [
         {
@@ -78,7 +79,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Events],
+  collections: [Pages, Posts, Media, Categories, Subcategories, Users, Events],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
