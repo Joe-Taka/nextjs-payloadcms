@@ -1,12 +1,23 @@
 'use client'
 import { Button } from '@helder-nicollas/govbr-react-components/button'
+import { useTheme } from '@/providers/Theme'
+import { useEffect } from 'react'
 
 export default function DesignSystem() {
+  const { setTheme } = useTheme()
+
+  useEffect(() => {
+    setTheme('light')
+  }, [setTheme])
+
   return (
     <div>
       <div>
         <h1 className="text-2xl">Componentes utilizando classe</h1>
         <button className="br-button primary mr-3" type="button">
+          Primário
+        </button>
+        <button className="br-button primary mr-3 dark:bg-emerald-300 bg-red-500" type="button">
           Primário
         </button>
         <button className="br-button secondary mr-3" type="button">
@@ -15,6 +26,9 @@ export default function DesignSystem() {
         <button className="br-button" type="button">
           Terciário
         </button>
+        <button className="bg-slate-300 p-4 rounded-xl border border-solid border-black">
+          Teste com Tailwind
+        </button>
       </div>
       <div className="col-sm-6 col-md-4 col-lg-3">
         <div className="br-card">
@@ -22,7 +36,7 @@ export default function DesignSystem() {
             <div className="d-flex">
               <span className="br-avatar mt-1" title="Fulano da Silva">
                 <span className="content">
-                  <img alt="test" src="https://picsum.photos/id/823/400" />
+                  <img src="https://picsum.photos/id/823/400" />
                 </span>
               </span>
               <div className="ml-3">
@@ -103,7 +117,8 @@ export default function DesignSystem() {
         </div>
       </div>
       <h1 className="text-2xl">Componentes de @helder-nicollas/govbr-react-components</h1>
-      <Button variant="primary" onClick={() => alert('hello')}>
+      <Button variant="primary">Botão primário</Button>
+      <Button variant="primary" className="dark:bg-emerald-300 bg-emerald-100">
         Botão primário
       </Button>
       <Button variant="outline">Botão outline</Button>
